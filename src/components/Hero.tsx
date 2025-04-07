@@ -1,7 +1,8 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, Download, Github, Linkedin, Mail } from "lucide-react";
+import { motion } from "framer-motion";
+import { slideInFromLeft, slideInFromRight } from "@/lib/animations";
 
 const Hero: React.FC = () => {
   return (
@@ -21,22 +22,56 @@ const Hero: React.FC = () => {
 
       <div className="container-custom relative z-10">
         <div className="grid md:grid-cols-12 gap-8 items-center">
-          <div className="md:col-span-7 space-y-6">
+          <motion.div 
+            className="md:col-span-7 space-y-6"
+            initial="initial"
+            animate="animate"
+            variants={slideInFromLeft}
+          >
             <div className="space-y-2">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-                <span className="text-primary block">SANTHOSH G</span>
-                <span className="block mt-2">Software Developer</span>
-                <span className="text-muted-foreground block text-2xl md:text-3xl lg:text-4xl mt-2">
+                <motion.span 
+                  className="text-primary block"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.7 }}
+                >
+                  SANTHOSH G
+                </motion.span>
+                <motion.span 
+                  className="block mt-2"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.7, delay: 0.3 }}
+                >
+                  Software Developer
+                </motion.span>
+                <motion.span 
+                  className="text-muted-foreground block text-2xl md:text-3xl lg:text-4xl mt-2"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.7, delay: 0.6 }}
+                >
                   Full Stack Development
-                </span>
+                </motion.span>
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground mt-6 max-w-xl">
+              <motion.p 
+                className="text-lg md:text-xl text-muted-foreground mt-6 max-w-xl"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.7, delay: 0.9 }}
+              >
                 Highly motivated developer with hands-on experience in building and 
                 deploying web applications using a diverse tech stack.
-              </p>
+              </motion.p>
             </div>
 
-            <div className="flex flex-wrap gap-4">
+            <motion.div 
+              className="flex flex-wrap gap-4"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 1.2 }}
+            >
               <Button asChild size="lg">
                 <a href="#contact">
                   Contact Me <ArrowRight className="ml-2 h-4 w-4" />
@@ -47,9 +82,14 @@ const Hero: React.FC = () => {
                   View Projects
                 </a>
               </Button>
-            </div>
+            </motion.div>
 
-            <div className="flex items-center gap-6 pt-6">
+            <motion.div 
+              className="flex items-center gap-6 pt-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 1.4 }}
+            >
               <a
                 href="https://www.linkedin.com/in/santhosh-software-developer"
                 target="_blank"
@@ -57,7 +97,9 @@ const Hero: React.FC = () => {
                 className="text-muted-foreground hover:text-primary transition-colors"
                 aria-label="LinkedIn"
               >
-                <Linkedin />
+                <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
+                  <Linkedin />
+                </motion.div>
               </a>
               <a
                 href="https://github.com/santhoshfullstackdeveloper"
@@ -66,20 +108,36 @@ const Hero: React.FC = () => {
                 className="text-muted-foreground hover:text-primary transition-colors"
                 aria-label="GitHub"
               >
-                <Github />
+                <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
+                  <Github />
+                </motion.div>
               </a>
               <a
                 href="mailto:santhoshgowndamani@gmail.com"
                 className="text-muted-foreground hover:text-primary transition-colors"
                 aria-label="Email"
               >
-                <Mail />
+                <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }}>
+                  <Mail />
+                </motion.div>
               </a>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
-          <div className="md:col-span-5">
-            <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border border-border relative z-10 card-hover">
+          <motion.div 
+            className="md:col-span-5"
+            initial="initial"
+            animate="animate"
+            variants={slideInFromRight}
+          >
+            <motion.div 
+              className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg border border-border relative z-10 card-hover"
+              whileHover={{ 
+                scale: 1.02,
+                boxShadow: "0 8px 30px rgba(0, 0, 0, 0.12)"
+              }}
+              transition={{ duration: 0.3 }}
+            >
               <div className="flex items-center mb-4">
                 <div className="h-3 w-3 rounded-full bg-red-500 mr-2"></div>
                 <div className="h-3 w-3 rounded-full bg-yellow-500 mr-2"></div>
@@ -125,8 +183,8 @@ const Hero: React.FC = () => {
                 </p>
                 <p>{"}"}</p>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       </div>
     </section>

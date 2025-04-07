@@ -2,6 +2,8 @@
 import React from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { School } from "lucide-react";
+import { motion } from "framer-motion";
+import { fadeInAnimationVariants } from "@/lib/animations";
 
 const Education: React.FC = () => {
   const educationData = [
@@ -31,29 +33,58 @@ const Education: React.FC = () => {
   return (
     <section id="education" className="section-padding bg-secondary/30">
       <div className="container-custom">
-        <h2 className="section-title">Education</h2>
+        <motion.h2 
+          className="section-title"
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
+          Education
+        </motion.h2>
         
         <div className="max-w-4xl mx-auto space-y-6">
-          {educationData.map((edu) => (
-            <Card key={edu.id} className="card-hover">
-              <CardHeader className="pb-2">
-                <div className="flex items-center gap-3">
-                  <div className="bg-primary/10 p-2 rounded-full">
-                    <School className="h-5 w-5 text-primary" />
+          {educationData.map((edu, index) => (
+            <motion.div
+              key={edu.id}
+              variants={fadeInAnimationVariants}
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+              custom={index}
+            >
+              <Card className="card-hover">
+                <CardHeader className="pb-2">
+                  <div className="flex items-center gap-3">
+                    <motion.div 
+                      className="bg-primary/10 p-2 rounded-full"
+                      whileHover={{ scale: 1.2, backgroundColor: "rgba(59, 130, 246, 0.25)" }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <School className="h-5 w-5 text-primary" />
+                    </motion.div>
+                    <CardTitle className="text-xl">{edu.degree}</CardTitle>
                   </div>
-                  <CardTitle className="text-xl">{edu.degree}</CardTitle>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  <p className="font-medium">{edu.institution}</p>
-                  <div className="flex justify-between text-sm text-muted-foreground">
-                    <span>{edu.duration}</span>
-                    <span className="font-medium text-foreground">Grade: {edu.grade}</span>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2">
+                    <p className="font-medium">{edu.institution}</p>
+                    <div className="flex justify-between text-sm text-muted-foreground">
+                      <span>{edu.duration}</span>
+                      <motion.span 
+                        className="font-medium text-foreground"
+                        initial={{ opacity: 0, x: 20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: 0.4, duration: 0.6 }}
+                        viewport={{ once: true }}
+                      >
+                        Grade: {edu.grade}
+                      </motion.span>
+                    </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </div>
